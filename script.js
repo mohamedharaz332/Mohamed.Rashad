@@ -3,9 +3,14 @@ let index = 0;
 const speed = 40;
 const typedText = document.getElementById("typed-text");
 const typingSound = new Audio("type.mp3");
+typingSound.volume = 0.5;
 
+// تفعيل الصوت بعد أول تفاعل من المستخدم
 document.addEventListener("click", () => {
-  typingSound.play().catch(() => {});
+  typingSound.play().then(() => {
+    typingSound.pause();
+    typingSound.currentTime = 0;
+  }).catch(() => {});
 });
 
 function changeColor() {
@@ -27,7 +32,7 @@ function typeEffect() {
     typedText.appendChild(span);
 
     typingSound.currentTime = 0;
-    typingSound.play();
+    typingSound.play().catch(() => {});
 
     index++;
     setTimeout(typeEffect, speed);
