@@ -2,6 +2,7 @@ const text = "Hello, I'm Mohamed R. Haraz, a beginner software developer passion
 let index = 0;
 const speed = 40;
 const typedText = document.getElementById("typed-text");
+const typingSound = new Audio("type.mp3"); // الصوت
 
 // دالة لتغيير اللون بالتناوب
 function changeColor() {
@@ -21,6 +22,11 @@ function typeEffect() {
     span.style.fontWeight = "bold"; // جعل النص بولد
     span.style.fontStyle = "italic"; // جعل النص مائل
     typedText.appendChild(span);
+
+    // تشغيل الصوت
+    typingSound.currentTime = 0;
+    typingSound.play();
+
     index++;
     setTimeout(typeEffect, speed);
   }
