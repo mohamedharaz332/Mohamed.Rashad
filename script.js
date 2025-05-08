@@ -2,28 +2,30 @@ const text = "Hello, I'm Mohamed R. Haraz, a beginner software developer passion
 let index = 0;
 const speed = 40;
 const typedText = document.getElementById("typed-text");
-const typingSound = new Audio("type.mp3"); // الصوت
+const typingSound = new Audio("type.mp3");
 
-// دالة لتغيير اللون بالتناوب
+document.addEventListener("click", () => {
+  typingSound.play().catch(() => {});
+});
+
 function changeColor() {
   const colors = ["#ff0000", "#00ff00", "#0000ff", "#ff00ff", "#00ffff"];
   let colorIndex = 0;
   setInterval(() => {
     typedText.style.color = colors[colorIndex];
     colorIndex = (colorIndex + 1) % colors.length;
-  }, 500); // تغيير اللون كل 500 ملي ثانية
+  }, 500);
 }
 
 function typeEffect() {
   if (index < text.length) {
     const span = document.createElement("span");
     span.textContent = text[index];
-    span.style.fontSize = "24px"; // تغيير حجم الخط
-    span.style.fontWeight = "bold"; // جعل النص بولد
-    span.style.fontStyle = "italic"; // جعل النص مائل
+    span.style.fontSize = "24px";
+    span.style.fontWeight = "bold";
+    span.style.fontStyle = "italic";
     typedText.appendChild(span);
 
-    // تشغيل الصوت
     typingSound.currentTime = 0;
     typingSound.play();
 
@@ -33,6 +35,6 @@ function typeEffect() {
 }
 
 window.onload = () => {
-  changeColor(); // تفعيل تأثير تغيير الألوان
-  typeEffect(); // بدء كتابة النص
+  changeColor();
+  typeEffect();
 };
