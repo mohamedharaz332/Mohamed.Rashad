@@ -1,16 +1,20 @@
 const text = "Hello, I'm Mohamed R. Haraz, a beginner software developer passionate about coding and technology. I'm currently learning Python and JavaScript, and practicing with tools like Git and VS Code. I've built small projects like simple websites and basic scripts, and I'm eager to keep learning and growing in the field.";
+
 let index = 0;
 const speed = 40;
 const typedText = document.getElementById("typed-text");
 const typingSound = new Audio("type.mp3");
 typingSound.volume = 0.5;
 
-// تفعيل الصوت بعد أول تفاعل من المستخدم
+// لازم أول تفاعل من المستخدم علشان المتصفح يسمح بالصوت
+let isTypingStarted = false;
+
 document.addEventListener("click", () => {
-  typingSound.play().then(() => {
-    typingSound.pause();
-    typingSound.currentTime = 0;
-  }).catch(() => {});
+  if (!isTypingStarted) {
+    isTypingStarted = true;
+    changeColor();
+    typeEffect();
+  }
 });
 
 function changeColor() {
@@ -31,6 +35,8 @@ function typeEffect() {
     span.style.fontStyle = "italic";
     typedText.appendChild(span);
 
+    // نشغّل الصوت مع كل حرف بشكل سريع ومنتظم
+    typingSound.pause();
     typingSound.currentTime = 0;
     typingSound.play().catch(() => {});
 
@@ -38,8 +44,3 @@ function typeEffect() {
     setTimeout(typeEffect, speed);
   }
 }
-
-window.onload = () => {
-  changeColor();
-  typeEffect();
-};
